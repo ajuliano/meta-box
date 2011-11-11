@@ -163,7 +163,7 @@ if ( !class_exists( 'RW_Meta_Box' ) ) {
 				 * 1st filter applies to all fields with the same type
 				 * 2nd filter applies to current field only
 				 */
-				$html = apply_filters( "rwmb_{$field['type']}_wrapper_html", "{$begin}{$field_html}{$end}", $field, $meta );
+				$html = apply_filters( "rwmb_{$field['type']}_wrapper_html", "{$begin}{$end}{$field_html}", $field, $meta );
 				$html = apply_filters( "rwmb_{$field['id']}_wrapper_html", $html, $field, $meta );
 
                 // Display label and input in DIV and allow user-defined class append
@@ -189,10 +189,8 @@ if ( !class_exists( 'RW_Meta_Box' ) ) {
 		 */
 		static function show_field_begin( $field, $meta ) {
 			$html = <<<HTML
-<div class="rwmb-label">
-	<label for="{$field['id']}">{$field['name']}</label><br />
-</div>
-<div class="rwmb-input">
+
+	<label for="{$field['id']}">{$field['name']}</label>
 HTML;
 			/**
 			 * Apply filter to field begin HTML
@@ -214,18 +212,20 @@ HTML;
 		 * @return string
 		 */
 		static function show_field_end( $field, $meta ) {
-			$html = "<p class='description'>{$field['desc']}</p></div>"; // AGM!!! Change TABLE to DIV
+			$html = '';
+			if ($field['desc']) { // show only if desc exists
+				$html = "<p class='description'>{$field['desc']}</p>"; // AGM!!! Change TABLE to DIV
 
-			/**
-			 * Apply filter to field begin HTML
-			 * 1st filter applies to all fields
-			 * 2nd filter applies to all fields with the same type
-			 * 3rd filter applies to current field only
-			 */
-			$html = apply_filters( "rwmb_end_html", $html, $field, $meta );
-			$html = apply_filters( "rwmb_{$field['type']}_end_html", $html, $field, $meta );
-			$html = apply_filters( "rwmb_{$field['id']}_end_html", $html, $field, $meta );
-
+				/**
+				 * Apply filter to field begin HTML
+				 * 1st filter applies to all fields
+				 * 2nd filter applies to all fields with the same type
+				 * 3rd filter applies to current field only
+				 */
+				$html = apply_filters( "rwmb_end_html", $html, $field, $meta );
+				$html = apply_filters( "rwmb_{$field['type']}_end_html", $html, $field, $meta );
+				$html = apply_filters( "rwmb_{$field['id']}_end_html", $html, $field, $meta );
+			}
 			return $html;
 		}
 
