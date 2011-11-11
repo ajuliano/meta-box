@@ -40,7 +40,7 @@ if ( !class_exists( 'RWMB_Wysiwyg_Field' ) ) {
 		 * @return string
 		 */
 		static function html( $html, $meta, $field ) {
-			return "<textarea class='rwmb-wysiwyg theEditor large-text' name='{$field['id']}' id='{$field['id']}' cols='60' rows='10'>$meta</textarea>";
+			return "<div id='editorcontainer'><textarea class='rwmb-wysiwyg theEditor large-text' name='{$field['id']}' id='{$field['id']}' cols='60' rows='10'>$meta</textarea></div>";
 		}
 	}
 }
