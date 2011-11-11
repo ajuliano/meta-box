@@ -16,9 +16,9 @@ if ( !class_exists( 'RWMB_Checkbox_List_Field' ) ) {
 				$meta = (array) $meta;
 			$html = array( );
 			foreach ( $field['options'] as $key => $value ) {
-				$html[] = "<input type='checkbox' class='rwmb-checkbox-list' name='{$field['id']}[]' value='{$key}'" . checked( in_array( $key, $meta ), true, false ) . " /> $value";
+				$html[] = "<li><input type='checkbox' class='rwmb-checkbox-list' name='{$field['id']}[]' value='{$key}'" . checked( in_array( $key, $meta ), true, false ) . " /> $value </li>";
 			}
-			return implode( '<br />', $html );
+			return '<ul>' . implode( $html ) . '</ul>';
 		}
 	}
 }
